@@ -1,0 +1,3 @@
+tasks:
+  summarize_text:
+    description: "Takes input text and returns a short summary."
