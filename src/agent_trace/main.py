@@ -1,7 +1,7 @@
 from .crew import run_task
 
 def run():
-    print("=== CrewAI Opik Tracing ===")
+    print("CrewAI Opik Tracing")
     while True:
         prompt = input("\nEnter text to summarize (or 'exit' to quit): ")
         if prompt.lower() == "exit":

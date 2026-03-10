@@ -1,11 +1,7 @@
 import logging
 from crewai import Agent, Task, Crew
 from opik.integrations.crewai import track_crewai
-
-# Suppress noisy litellm cold-storage fastapi import error (harmless bug in litellm)
 logging.getLogger("LiteLLM").setLevel(logging.CRITICAL)
-
-# One-liner: automatically traces every CrewAI run in Opik
 track_crewai()
 
 
