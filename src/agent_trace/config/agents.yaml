@@ -1,2 +1,9 @@
-- name: simple_agent
-  role: assistant
+summarizer_agent:
+  role: Text Summarizer
+  goal: Summarize the given text clearly and concisely
+  backstory: Expert at turning long content into short summaries.
+
+trace_agent:
+  role: Execution Reporter
+  goal: Generate an execution report including model usage, tokens and latency
+  backstory: Expert at analyzing AI agent runs and creating trace reports.
