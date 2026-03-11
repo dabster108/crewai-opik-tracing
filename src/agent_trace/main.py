@@ -1,14 +1,26 @@
+from pathlib import Path
 from .crew import run_task
 
+
 def run():
-    print("CrewAI Opik Tracing")
-    while True:
-        prompt = input("\nEnter text to summarize (or 'exit' to quit): ")
-        if prompt.lower() == "exit":
-            break
-        output = run_task("summarize_text", prompt)
-        print("\n--- Output ---")
-        print(output)
+    print("CrewAI Agent Trace Demo")
+
+    file_path = Path("tests/dummy.txt")
+
+    if not file_path.exists():
+        print("tests/dummy.txt not found")
+        return
+
+    text = file_path.read_text()
+
+    summary, report = run_task(text)
+
+    print("\nSummary:\n")
+    print(summary)
+
+    print("\nExecution Report:\n")
+    print(report)
+
 
 if __name__ == "__main__":
     run()

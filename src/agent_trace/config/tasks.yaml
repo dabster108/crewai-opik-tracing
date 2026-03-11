@@ -1,3 +1,7 @@
-tasks:
-  summarize_text:
-    description: "Takes input text and returns a short summary."
+summarize_text:
+  description: Summarize the provided text input.
+  expected_output: A concise summary in 2-3 sentences.
+
+generate_trace_report:
+  description: Generate an execution report using model, token and latency information.
+  expected_output: A structured execution report showing model used, tokens, latency and status.

@@ -1,25 +1,60 @@
+import time
 import logging
 from crewai import Agent, Task, Crew
 from opik.integrations.crewai import track_crewai
+
 logging.getLogger("LiteLLM").setLevel(logging.CRITICAL)
+
 track_crewai()
 
 
-def run_task(task_name: str, prompt: str) -> str:
-    agent = Agent(
+def run_task(prompt: str):
+
+    start_time = time.time()
+
+    summarizer = Agent(
         role="Text Summarizer",
-        goal="Summarize the given text clearly and concisely",
-        backstory="You are an expert at distilling long content into short, clear summaries.",
+        goal="Summarize text clearly",
+        backstory="Expert at turning long text into short summaries.",
         llm="groq/llama-3.3-70b-versatile",
-        verbose=True,
+        verbose=True
     )
 
-    task = Task(
+    summarize_task = Task(
         description=f"Summarize the following text:\n\n{prompt}",
-        expected_output="A concise summary in 2-3 sentences.",
-        agent=agent,
+        expected_output="A short summary in 2-3 sentences.",
+        agent=summarizer
     )
 
-    crew = Crew(agents=[agent], tasks=[task], verbose=True)
+    crew = Crew(
+        agents=[summarizer],
+        tasks=[summarize_task],
+        verbose=True,
+        tracing=True
+    )
+
     result = crew.kickoff()
-    return str(result)
+
+    latency = round(time.time() - start_time, 2)
+
+    usage = crew.usage_metrics
+
+    tokens = usage.total_tokens if usage else "Unknown"
+
+    model = "llama-3.3-70b-versatile"
+
+    cost = "Approx $0.0003"
+
+    execution_report = f"""
+Execution Report
+
+Agent: Text Summarizer
+Model: {model}
+Tokens Used: {tokens}
+Latency: {latency}s
+Cost: {cost}
+
+Task Status: Completed
+"""
+
+    return result, execution_report
