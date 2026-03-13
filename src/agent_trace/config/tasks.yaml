@@ -5,3 +5,5 @@ summarize_text:
 generate_trace_report:
   description: Generate an execution report using model, token and latency information.
   expected_output: A structured execution report showing model used, tokens, latency and status.
+
+# advanced_Trace_Agent_Added
