@@ -8,7 +8,8 @@ logging.getLogger("LiteLLM").setLevel(logging.CRITICAL)
 
 track_crewai()
 
-REPORT_PATH = Path("/Users/dikshanta/Documents/crewai-opik-tracing/agent_trace/Report/reportagent.md")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+REPORT_PATH = PROJECT_ROOT / "Report" / "reportagent.md"
 
 
 def run_task(prompt: str):
